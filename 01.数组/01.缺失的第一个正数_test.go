@@ -1,4 +1,4 @@
-package _1_数组
+package array
 
 import (
 	"fmt"
