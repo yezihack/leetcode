@@ -40,10 +40,13 @@ F(N) = F(N - 1) + F(N - 2), 其中 N > 1.
 //推导出递推公式: 从上到下递推,如果想求f(n)的结果,则是f(n)=f(n-1)+f(n-2)
 //time:2^N, space:O(n) 递归就是使用系统中的栈实现的.
 func fib(n int) int{
-	if n <= 1 {
-		return n
+	if n <= 0 { //边界条件
+		return 0
 	}
-	return fib(n-2)+fib(n-1)
+	if n == 1 { //只有1个数时,就是1
+		return 1
+	}
+	return fib(n-2)+fib(n-1) //跟据推导公式求得.
 }
 func TestFib(t *testing.T) {
 	tests := []struct{
@@ -65,13 +68,18 @@ func TestFib(t *testing.T) {
 //从下向上推导,最终求得结果
 //Time:O(n), space:O(n)
 func fibDp(n int) int {
-	if n <= 1 {
-		return n
+	if n <= 0 { //边界条件
+		return 0
 	}
+	if n == 1 { //只有1个数时,就是1
+		return 1
+	}
+	//定义一个dp数组, 每计算一步存储起来, 记忆法.
+	//申请n+1空间大小.
 	dp := make([]int, n+1)
 	dp[1] = 1
 	for i := 2; i <= n; i ++ {
-		dp[i] = dp[i-2] + dp[i-1]
+		dp[i] = dp[i-2] + dp[i-1] //推导公式求得.
 	}
 	return dp[n]
 }

@@ -36,20 +36,22 @@ import (
 //方法一: 动态规划
 //爬1层,则是一种方法.爬2层,可以每次爬1层,也可以一次爬2层.
 func ClimbStairs(n int) int {
-	if n < 0 {
+	if n < 0 { //边界条件判断
 		return 0
 	}
-	if n <= 1 {
+	if n == 1 { //如果只有1层楼梯则只有1种方法.
 		return n
 	}
+	//定义一个DP数组.存储每爬一层楼梯累枳的可能的方法
+	//一种自下而上的思路
 	dp := make([]int, n)
-	dp[0] = 1
-	dp[1] = 2
-	for i := 2; i < n; i ++ {
-		dp[i] = dp[i-1] + dp[i-2]
+	dp[0] = 1 //如果楼梯只有1层,则只有1种爬法.
+	dp[1] = 2 //如果楼梯有2层,则有2种
+	for i := 2; i < n; i ++ { //从第3层楼梯开始爬
+		dp[i] = dp[i-1] + dp[i-2] //每爬一层,即是前面n-1层爬法和n-2层的爬法.
 	}
 	fmt.Println(dp)
-	return dp[n-1]
+	return dp[n-1] //取最后一楼,即求得n层楼梯的可能爬法.
 }
 func TestClimbStairs(t *testing.T) {
 	tests := []struct{

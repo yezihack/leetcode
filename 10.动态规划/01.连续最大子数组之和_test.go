@@ -101,7 +101,6 @@ func TestContinueChildArraySumDpV2(t *testing.T) {
 	if ret := ContinueChildArraySumDpV2([]int{1, -2, 3, 1}); ret != 4 {
 		t.Errorf("actual:%d, expect:%d\n", ret, 4)
 	}
-	return
 	if ret := ContinueChildArraySumDpV2([]int{1, -5, 2, -4, 2, 3}); ret != 5 {
 		t.Errorf("actual:%d, expect:%d\n", ret, 5)
 	}
