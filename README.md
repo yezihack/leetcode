@@ -1,12 +1,4 @@
-<!--
- * @Author: 百里
- * @Date: 2020-02-10 22:37:38
- * @LastEditTime : 2020-02-10 22:46:41
- * @LastEditors  : 百里
- * @Description: 
- * @FilePath: \leetcode\README.md
- * @https://github.com/yezihack
- -->
+![](https://img.shields.io/badge/LeetCode-Algo-orange?style=flat-square&logo=appveyor)
 # Leetcode 
 > 将算法进行到底, 把每一个步骤说明白, 深入算法本质.小白也能看懂的算法求解过程.
 
