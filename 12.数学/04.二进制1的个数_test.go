@@ -7,7 +7,7 @@
  * @FilePath: \leetcode\20.剑指offer\15.二进制1的个数_test.go
  * @https://github.com/yezihack
  */
-package 剑指offer
+package mathematics
 
 import (
 	"fmt"

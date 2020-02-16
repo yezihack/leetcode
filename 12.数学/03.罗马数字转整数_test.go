@@ -1,4 +1,4 @@
-package _2_数学
+package mathematics
 
 import (
 	"fmt"
