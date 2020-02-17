@@ -33,13 +33,13 @@ import (
 //	4 ms	2.8 MB
 func FirstMissingPositive(nums []int) int {
 	hash := make(map[int]struct{}, len(nums))
-	for i := 0; i < len(nums); i ++ {
+	for i := 0; i < len(nums); i++ {
 		hash[nums[i]] = struct{}{}
 	}
 	fmt.Println(hash)
 	//1-n之间检查, 如果有缺失则是最小值.
-	for i := 1; i <= len(nums); i ++ { //从1循环到n, 包含n
-		if _,ok := hash[i]; !ok {
+	for i := 1; i <= len(nums); i++ { //从1循环到n, 包含n
+		if _, ok := hash[i]; !ok {
 			return i
 		}
 	}
@@ -47,15 +47,15 @@ func FirstMissingPositive(nums []int) int {
 	return len(nums) + 1
 }
 func TestFirstMissingPositive(t *testing.T) {
-	tests := []struct{
-		index int //序号
-		data []int //数据
-		expect int //预期值
+	tests := []struct {
+		index  int   //序号
+		data   []int //数据
+		expect int   //预期值
 	}{
 		{1, []int{1, -1, 3, 4}, 2},
-		{2, []int{7,8,9,11,12}, 1},
-		{3, []int{1,2,0}, 3},
-		{4, []int{3,4,-1,1}, 2},
+		{2, []int{7, 8, 9, 11, 12}, 1},
+		{3, []int{1, 2, 0}, 3},
+		{4, []int{3, 4, -1, 1}, 2},
 	}
 	for _, item := range tests {
 		if actual := FirstMissingPositive(item.data); actual != item.expect {
@@ -68,31 +68,31 @@ func TestFirstMissingPositive(t *testing.T) {
 func FirstMissingPositiveV2(nums []int) int {
 	length := len(nums)
 	fmt.Println(nums)
-	for i := 0; i < length; i ++{
-		for nums[i] > 0 && nums[i] <= length && nums[i] != nums[nums[i]-1]{
-			tmp  := nums[i]
+	for i := 0; i < length; i++ {
+		for nums[i] > 0 && nums[i] <= length && nums[i] != nums[nums[i]-1] {
+			tmp := nums[i]
 			fmt.Printf("tmp:%d, i:%d, i+1:%d\n", tmp, nums[i], nums[i+1])
 			nums[i] = nums[nums[i]-1]
 			nums[nums[i]-1] = tmp
 		}
 	}
-	for i := 0; i <= length; i ++ {
-		if nums[i] != i + 1 {
+	for i := 0; i <= length; i++ {
+		if nums[i] != i+1 {
 			return i + 1
 		}
 	}
-	return length+1
+	return length + 1
 }
 func TestFirstMissingPositiveV2(t *testing.T) {
-	tests := []struct{
-		index int //序号
-		data []int //数据
-		expect int //预期值
+	tests := []struct {
+		index  int   //序号
+		data   []int //数据
+		expect int   //预期值
 	}{
 		{1, []int{1, -1, 3, 4}, 2},
-		{2, []int{7,8,9,11,12}, 1},
-		{3, []int{1,2,0}, 3},
-		{4, []int{3,4,-1,1}, 2},
+		{2, []int{7, 8, 9, 11, 12}, 1},
+		{3, []int{1, 2, 0}, 3},
+		{4, []int{3, 4, -1, 1}, 2},
 	}
 	for _, item := range tests {
 		if actual := FirstMissingPositiveV2(item.data); actual != item.expect {

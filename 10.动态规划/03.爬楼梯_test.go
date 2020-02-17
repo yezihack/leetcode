@@ -1,3 +1,12 @@
+/*
+ * @Author: 百里
+ * @Date: 2020-02-16 09:29:53
+ * @LastEditTime : 2020-02-16 21:22:54
+ * @LastEditors: Please set LastEditors
+ * @Description:
+ * @FilePath: \leetcode\10.动态规划\03.爬楼梯_test.go
+ * @https://github.com/yezihack
+ */
 package dp
 
 import (
@@ -45,17 +54,18 @@ func ClimbStairs(n int) int {
 	//定义一个DP数组.存储每爬一层楼梯累枳的可能的方法
 	//一种自下而上的思路
 	dp := make([]int, n)
-	dp[0] = 1 //如果楼梯只有1层,则只有1种爬法.
-	dp[1] = 2 //如果楼梯有2层,则有2种
-	for i := 2; i < n; i ++ { //从第3层楼梯开始爬
+	dp[0] = 1                //如果楼梯只有1层,则只有1种爬法.
+	dp[1] = 2                //如果楼梯有2层,则有2种
+	for i := 2; i < n; i++ { //从第3层楼梯开始爬
 		dp[i] = dp[i-1] + dp[i-2] //每爬一层,即是前面n-1层爬法和n-2层的爬法.
 	}
 	fmt.Println(dp)
+
 	return dp[n-1] //取最后一楼,即求得n层楼梯的可能爬法.
 }
 func TestClimbStairs(t *testing.T) {
-	tests := []struct{
-		data int //数据
+	tests := []struct {
+		data   int //数据
 		expect int //预期值
 	}{
 		{2, 2},
@@ -63,7 +73,7 @@ func TestClimbStairs(t *testing.T) {
 	}
 	for index, item := range tests {
 		if actual := ClimbStairs(item.data); actual != item.expect {
-			index ++
+			index++
 			t.Errorf("index:%d, expect:%d, actual:%d\n", index, item.expect, actual)
 		}
 	}
