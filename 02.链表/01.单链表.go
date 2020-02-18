@@ -10,15 +10,9 @@
 package linked
 
 type ISingleLinked interface {
-	InsertHead()
-	Append()
+	AddHead(data int) //插入头节点
+	Append(data int)  //追加节点,即添加到尾部.
+	RemoveHead() bool //删除头节点
+	RemoveTail() bool //删除尾节点
 }
 
-//定义链表节点
-type SingleLinkedNode struct {
-	Next *SingleLinkedNode //单链表只有一个后继节点
-	Data int               //节点数据
-}
-type SingleLinked struct {
-	head *SingleLinkedNode //只有一个头指针
-}

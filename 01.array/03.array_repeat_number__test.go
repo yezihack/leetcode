@@ -114,5 +114,6 @@ func InArray(a int, arr []int) bool {
 			return true
 		}
 	}
+
 	return false
 }

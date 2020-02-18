@@ -64,24 +64,31 @@ func TestFirstMissingPositive(t *testing.T) {
 	}
 }
 
-//原地桶排序一次. 原地交换. 如1则放在0的位置.
+//解题: 原地桶排序
+//最小整数大于等于1, 小于的都不符合.也就是说:数字1,应该存放在0下标, 数字2存放在1的位置
+//如果不符合的元素,再进行遍历一遍: 条件: 数字==数字-1(下标),如果不符合则就是缺失的最小整数的元素
+//[4, 2, -1, 1]. 进行调整: [1, 2, -1, 4]. 发现只有-1与他所在的下标不符合.即是缺失的最小整数.
 func FirstMissingPositiveV2(nums []int) int {
-	length := len(nums)
-	fmt.Println(nums)
-	for i := 0; i < length; i++ {
-		for nums[i] > 0 && nums[i] <= length && nums[i] != nums[nums[i]-1] {
-			tmp := nums[i]
-			fmt.Printf("tmp:%d, i:%d, i+1:%d\n", tmp, nums[i], nums[i+1])
-			nums[i] = nums[nums[i]-1]
-			nums[nums[i]-1] = tmp
+	l := len(nums)
+	for i := 0; i < l; i++ {
+		for nums[i] > 0 /*最小正整数必须大于0*/ &&
+			nums[i] <= l /*最小正整数必须等于长度. 因为4的元素存放在3的下标*/ &&
+			nums[i] != nums[nums[i]-1] /*元素与下标减1不符合则需要调整*/ {
+			tmp := nums[i]        //元素存放在临时变量.
+			nums[i] = nums[tmp-1] //寻找元素所处在下标正确的位置,如元素3应该存放在下标2的位置.
+			nums[tmp-1] = tmp     //as above
+			//也可以写成
+			//nums[i], nums[nums[i]-1] = nums[nums[i]-1], nums[i]
 		}
 	}
-	for i := 0; i <= length; i++ {
-		if nums[i] != i+1 {
+	//调整好的位置, 可以查看结果, 缺失的位置.
+	fmt.Println(nums)
+	for i := 0; i < l; i++ {
+		if nums[i] != i+1 { //元素必须与下标i+1相等,才是元素所处的正常位置.如元素3应该存放在下标2的位置.
 			return i + 1
 		}
 	}
-	return length + 1
+	return l + 1
 }
 func TestFirstMissingPositiveV2(t *testing.T) {
 	tests := []struct {
@@ -95,8 +102,24 @@ func TestFirstMissingPositiveV2(t *testing.T) {
 		{4, []int{3, 4, -1, 1}, 2},
 	}
 	for _, item := range tests {
-		if actual := FirstMissingPositiveV2(item.data); actual != item.expect {
+		if actual := FirstMissingPositiveV3(item.data); actual != item.expect {
 			t.Errorf("index:%d, expect:%d, actual:%d\n", item.index, item.expect, actual)
 		}
 	}
+}
+
+//重复练习
+func FirstMissingPositiveV3(nums []int) int {
+	hash := make(map[int]struct{})
+	for i := 0; i < len(nums); i++ {
+		if nums[i] > 0 {
+			hash[nums[i]] = struct{}{}
+		}
+	}
+	for i := 1; i <= len(nums); i++ {
+		if _, ok := hash[i]; !ok {
+			return i
+		}
+	}
+	return len(nums) + 1
 }

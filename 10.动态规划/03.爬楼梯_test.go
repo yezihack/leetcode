@@ -1,7 +1,7 @@
 /*
  * @Author: 百里
  * @Date: 2020-02-16 09:29:53
- * @LastEditTime : 2020-02-16 21:22:54
+ * @LastEditTime: 2020-02-18 10:01:53
  * @LastEditors: Please set LastEditors
  * @Description:
  * @FilePath: \leetcode\10.动态规划\03.爬楼梯_test.go
@@ -63,6 +63,7 @@ func ClimbStairs(n int) int {
 
 	return dp[n-1] //取最后一楼,即求得n层楼梯的可能爬法.
 }
+
 func TestClimbStairs(t *testing.T) {
 	tests := []struct {
 		data   int //数据
