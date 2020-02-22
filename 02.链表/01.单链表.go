@@ -9,10 +9,16 @@
  */
 package linked
 
-type ISingleLinked interface {
-	AddHead(data int) //插入头节点
-	Append(data int)  //追加节点,即添加到尾部.
-	RemoveHead() bool //删除头节点
-	RemoveTail() bool //删除尾节点
+type SNode struct {
+	data int
+	next *SNode //后继节点
 }
 
+type ISingleLinked interface {
+	AddHead(data int)            //插入头节点
+	Append(data int)             //追加节点,即添加到尾部.
+	RemoveHead() bool            //删除头节点
+	RemoveTail() bool            //删除尾节点
+	RemoveNode(node *SNode) bool //删除节点
+	Print() string               //打印链表
+}
