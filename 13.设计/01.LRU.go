@@ -116,7 +116,7 @@ func (l *Linked) AddHead(key, value int) *LinkedNode {
 //追加新的节点
 func (l *Linked) Append(key, value int) *LinkedNode {
 	node := &LinkedNode{key: key, value: value}
-	if l.tail == nil {
+	if l.tail == nil { //如果尾指针为空则设置头与尾指针
 		l.head = node
 		l.tail = node
 	} else {
@@ -135,16 +135,16 @@ func (l *Linked) Append(key, value int) *LinkedNode {
 //3. 节点前驱是否为空
 //4. 节点后继是否为空
 func (l *Linked) RemoveNode(node *LinkedNode) bool {
-	if node == l.head {
-		l.head = l.head.next
-	} else if node == l.tail {
-		l.tail = l.tail.prev
+	if node == l.head { //要删除的节点等于头节点的话
+		l.head = l.head.next //头指针的后继指针指作为新的头指针
+	} else if node == l.tail { //如果要删除的节点是尾节点的话
+		l.tail = l.tail.prev //将尾指针的前驱指针作为新的尾指针.
 	}
-	if node.prev != nil {
-		node.prev.next = node.next
+	if node.prev != nil { //要删除的节点前驱不为空的话
+		node.prev.next = node.next //则将删除的节点的前驱节点的后继指针指向要删除的节点的后继节点.
 	}
-	if node.next != nil {
-		node.next.prev = node.prev
+	if node.next != nil { //要删除的节点后继不为空的话.
+		node.next.prev = node.prev //则将删除的节点后前驱指向要删除的节点前驱节点
 	}
 	l.length--
 	return true
@@ -156,11 +156,11 @@ func (l *Linked) RemoveTail() *LinkedNode {
 		return nil
 	}
 	node := l.tail
-	if l.tail.prev == nil {
-		l.head, l.tail = nil, nil
+	if l.tail.prev == nil { //尾节点的前以区为空的话
+		l.head, l.tail = nil, nil //则头与尾都设置为空
 	} else {
-		l.tail = l.tail.prev
-		l.tail.next = nil
+		l.tail = l.tail.prev //尾节点的前驱作为新的尾节点
+		l.tail.next = nil    //将新的尾节点后继指针设置为空
 	}
 	l.length--
 	return node
@@ -171,13 +171,13 @@ func (l *Linked) Reverse() *LinkedNode {
 	if l.head == nil {
 		return nil
 	}
-	head := l.head //获取头节点
-	var prev *LinkedNode
+	head := l.head       //获取头节点
+	var prev *LinkedNode //声明一个空节点,用于实现头插法.
 	for head != nil {
-		node := head.next
-		head.next = prev
-		prev = head
-		head = node
+		node := head.next //截断头节点与后继的节点.
+		head.next = prev  //将头节点后继指向新的节点上.即prev
+		prev = head       //将整个head作为prev节点.
+		head = node       //设置新的头节点.即截断的后部分
 	}
 	return prev
 }
@@ -185,11 +185,11 @@ func (l *Linked) Reverse() *LinkedNode {
 //打印链表
 func (l *Linked) Print() string {
 	str := ""
-	head := l.head
-	for head != nil {
-		str += fmt.Sprintf("%d:%d", head.key, head.value)
-		head = head.next
-		if head != nil {
+	node := l.head    //声明一个节点
+	for node != nil { //循环判断节点是否为空
+		str += fmt.Sprintf("%d:%d", node.key, node.value)
+		node = node.next //继续探测后继节点
+		if node != nil { //如果不为空则加个标签.
 			str += "=>"
 		}
 	}
