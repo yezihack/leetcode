@@ -42,8 +42,8 @@ func (this *LRUCache) Put(key, value int) {
 		this.setHeader(node)
 	} else {
 		if len(this.MapCache) >= this.capacity {
-			delete(this.MapCache, key) //删除缓存中的数据.
-			this.remove(this.end)      //再移除最后一个节点
+			delete(this.MapCache, this.end.key) //删除缓存中的数据.
+			this.remove(this.end)               //再移除最后一个节点
 		}
 		node := &Node{key: key, value: value}
 		this.MapCache[key] = node
